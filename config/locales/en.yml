@@ -1,0 +1,22 @@
+en:
+  date:
+    formats:
+      default: '%m/%d/%Y'
+      with_weekday: '%a %m/%d/%y'
+
+  time:
+    formats:
+      default: '%a, %b %-d, %Y at %r'
+      date: '%b %-d, %Y'
+      short: '%B %d'
+
+  query:
+    filter_groups:
+      contacts_query:
+        group:
+          name: 'Filter by Group'
+          scopes:
+            of_family: 'Family'
+            of_work: 'Work'
+            of_friends: 'Firends'
+            empty: 'All'
