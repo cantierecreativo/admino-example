@@ -1,6 +1,8 @@
 module PermittedParamsConcern
+  extend ActiveSupport::Concern
+
   def resource_params
-    if action_name == "create" || action_name == "update"
+    if %w(create update).include?(action_name)
       [ permitted_params ]
     end
   end

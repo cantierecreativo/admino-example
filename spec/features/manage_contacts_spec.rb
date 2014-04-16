@@ -5,7 +5,6 @@ feature 'As a visitor' do
   let(:new_page) { Contacts::NewPage.new }
   let(:edit_page) { Contacts::EditPage.new }
 
-
   scenario 'I want to add a new contact' do
     new_page.load
 
@@ -17,9 +16,7 @@ feature 'As a visitor' do
   context 'given a contact' do
     let(:contact) { create(:contact) }
 
-    before do
-      contact
-    end
+    before { contact }
 
     scenario 'I want to see it in the list' do
       index_page.load
@@ -36,3 +33,4 @@ feature 'As a visitor' do
     end
   end
 end
+

@@ -1,5 +1,6 @@
 module Contacts
   class EditPage < NewPage
-    set_url '/contacts{/id}/edit'
+    set_url '/admin/contacts{/id}/edit'
   end
 end
+

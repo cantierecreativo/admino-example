@@ -3,15 +3,27 @@ class Contact < ActiveRecord::Base
 
   validates :first_name, presence: true
   validates :last_name, presence: true
+  validates :group, presence: true
   validates :email, presence: true, email: true, uniqueness: true
 
-  scope :matching_email, -> (email) { where('email ILIKE ?', "%#{email}%") }
-  scope :of_family, -> { where(group: Contact.groups[:family]) }
-  scope :of_work, -> { where(group: Contact.groups[:work]) }
-  scope :of_friends, -> { where(group: Contact.groups[:friends]) }
+  scope :matching_email, -> (text) {
+    where('email ILIKE :text', text: "%#{text}%")
+  }
+  scope :matching_name, -> (text) {
+    where(
+      'first_name ILIKE :text OR last_name ILIKE :text',
+      text: "%#{text}%"
+    )
+  }
 
-  scope :by_first_name, ->(direction) { order(first_name: direction) }
-  scope :by_last_name, ->(direction) { order(last_name: direction) }
-  scope :by_email, ->(direction) { order(email: direction) }
-  scope :by_group, ->(direction) { order(group: direction) }
+  scope :family, -> { where(group: Contact.groups[:family]) }
+  scope :work, -> { where(group: Contact.groups[:work]) }
+  scope :friends, -> { where(group: Contact.groups[:friends]) }
+
+  scope :sort_by_name, ->(direction) do
+    order("last_name #{direction}, first_name #{direction}")
+  end
+  scope :sort_by_email, ->(direction) { order(email: direction) }
+  scope :sort_by_group, ->(direction) { order(group: direction) }
 end
+

@@ -2,7 +2,7 @@ class BootstrapTablePresenter < Admino::Table::Presenter
   private
 
   def table_html_options
-    { class: 'table table-striped table-hover' }
+    { class: 'table table-striped table-hover table-admino' }
   end
 
   def resource_row(resource, view_context)
@@ -19,16 +19,18 @@ class BootstrapTablePresenter < Admino::Table::Presenter
     end
 
     def edit_action_html_options
-      {
-        class: 'btn btn-default btn-sm'
-      }
+      { class: 'btn btn-default btn-sm' }
     end
 
     def destroy_action_html_options
       {
         method: :delete,
-        class: 'btn btn-danger btn-sm'
+        class: 'btn btn-danger btn-sm',
+        data: {
+          confirm: 'Are you sure?'
+        }
       }
     end
   end
 end
+

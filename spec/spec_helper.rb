@@ -30,3 +30,4 @@ end
 
 Capybara.javascript_driver = :webkit
 WebMock.disable_net_connect!(allow_localhost: true)
+

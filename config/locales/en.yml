@@ -11,12 +11,49 @@ en:
       short: '%B %d'
 
   query:
+    attributes:
+      contacts_query:
+        matching_email: 'By email'
+        matching_name: 'By name'
     filter_groups:
       contacts_query:
         group:
           name: 'Filter by Group'
           scopes:
-            of_family: 'Family'
-            of_work: 'Work'
-            of_friends: 'Firends'
+            family: 'Family'
+            work: 'Work'
+            friends: 'Friends'
             empty: 'All'
+
+  activerecord:
+    models:
+      contact:
+        one: 'Contact'
+        other: 'Contacts'
+    attributes:
+      contact:
+        full_name: 'Name'
+
+  helpers:
+    submit:
+      query:
+        create: "Filter results"
+
+  admin:
+    base:
+      index:
+        title: 'List %{plural}'
+        actions:
+          new: 'Create new %{singular}'
+      new:
+        title: 'Create new %{singular}'
+      edit:
+        title: 'Edit %{singular}'
+
+  enums:
+    contact:
+      group:
+        family: Family
+        friends: Friend
+        work: Work
+

@@ -1,0 +1,38 @@
+- query = present(@query)
+
+- table = BootstrapTablePresenter.new present_collection(collection),
+                                      resource_class,
+                                      query,
+                                      self
+
+.page-header
+  h1= t('.title', resource_class_name_inflections)
+
+.row
+  .col-lg-9
+    = table.to_html do |row, record|
+      = render 'index_row', row: row, record: record
+
+    = paginate collection
+
+    p= link_to new_resource_path, class: 'btn btn-primary btn-lg btn-glyphicon' do
+      i.glyphicon.glyphicon-plus
+      span= t('.actions.new', resource_class_name_inflections)
+
+  .col-lg-3
+    .panel.panel-default
+      .panel-heading: .panel-title Search
+      .panel-body
+        = query.simple_form do |form|
+          = render 'query_form', query: query, form: form
+          = form.button :submit
+
+    - query.filter_groups.each do |filter_group|
+      .panel.panel-default
+        .panel-heading: .panel-title= filter_group.name
+        .list-group
+          - filter_group.scopes.each do |scope|
+            = filter_group.scope_link scope,
+                                      class: 'list-group-item',
+                                      active_class: 'active'
+

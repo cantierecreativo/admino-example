@@ -13,6 +13,7 @@ gem 'faker'
 gem 'inherited_resources'
 gem 'jquery-rails'
 gem 'kaminari'
+gem 'kaminari-bootstrap', '~> 3.0.1'
 gem 'pg'
 gem 'rack-cache'
 gem 'rack-timeout'
@@ -57,3 +58,4 @@ end
 group :staging, :production do
   gem 'rails_12factor'
 end
+

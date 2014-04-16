@@ -12,15 +12,33 @@ describe Contact do
   describe '.matching_email' do
     let(:contact) { create(:contact, email: 'foo@bar.com') }
 
-    before do
-      contact
-    end
+    before { contact }
 
-    it 'displays the contacts matching the provided email' do
+    it 'displays the contacts with email matching the provided text' do
       expect(Contact.matching_email('foo')).to eq([contact])
     end
 
-    it 'filters out the contacts not matching the provided email' do
+    it 'filters out the contacts not matching the provided text' do
+      expect(Contact.matching_email('whatever')).to_not eq([contact])
+    end
+  end
+
+  describe '.matching_name' do
+    let(:contact) do
+      create(:contact, first_name: 'Stefano', last_name: 'Verna')
+    end
+
+    before { contact }
+
+    it 'displays the contacts with first name matching the provided text' do
+      expect(Contact.matching_email('ste')).to eq([contact])
+    end
+
+    it 'displays the contacts with last name matching the provided text' do
+      expect(Contact.matching_email('rna')).to eq([contact])
+    end
+
+    it 'filters out the contacts not matching the provided text' do
       expect(Contact.matching_email('whatever')).to_not eq([contact])
     end
   end
@@ -36,57 +54,44 @@ describe Contact do
       friends_contact
     end
 
-    describe '.of_family' do
+    describe '.family' do
       it 'displays only the contacts of family group' do
-        expect(Contact.of_family).to eq([family_contact])
+        expect(Contact.family).to eq([family_contact])
       end
     end
 
-    describe '.of_work' do
+    describe '.work' do
       it 'displays only the contacts of work group' do
-        expect(Contact.of_work).to eq([work_contact])
+        expect(Contact.work).to eq([work_contact])
       end
     end
 
-    describe '.of_friends' do
+    describe '.friends' do
       it 'displays only the contacts of friends group' do
-        expect(Contact.of_friends).to eq([friends_contact])
+        expect(Contact.friends).to eq([friends_contact])
       end
     end
   end
 
   describe 'ordering scopes' do
-    describe '.by_first_name' do
-      let(:first_contact) { create(:contact, first_name: 'a') }
-      let(:second_contact) { create(:contact, first_name: 'b') }
+    describe '.sort_by_name' do
+      let(:first_contact) { create(:contact, last_name: 'a', first_name: 'a') }
+      let(:second_contact) { create(:contact, last_name: 'a', first_name: 'z') }
+      let(:third_contact) { create(:contact, last_name: 'b', first_name: 'a') }
 
       before do
         first_contact
         second_contact
+        third_contact
       end
 
       it 'orders the contacts by first name' do
-        expect(Contact.all).to eq [first_contact, second_contact]
-        expect(Contact.by_first_name(:desc)).to eq [second_contact, first_contact]
+        expect(Contact.sort_by_name(:asc)).to eq [first_contact, second_contact, third_contact]
+        expect(Contact.sort_by_name(:desc)).to eq [third_contact, second_contact, first_contact]
       end
     end
 
-    describe '.by_last_name' do
-      let(:first_contact) { create(:contact, last_name: 'a') }
-      let(:second_contact) { create(:contact, last_name: 'b') }
-
-      before do
-        first_contact
-        second_contact
-      end
-
-      it 'orders the contacts by first name' do
-        expect(Contact.all).to eq [first_contact, second_contact]
-        expect(Contact.by_last_name(:desc)).to eq [second_contact, first_contact]
-      end
-    end
-
-    describe '.by_email' do
+    describe '.sort_by_email' do
       let(:first_contact) { create(:contact, email: 'a@example.com') }
       let(:second_contact) { create(:contact, email: 'b@example.com') }
 
@@ -96,12 +101,12 @@ describe Contact do
       end
 
       it 'orders the contacts by first name' do
-        expect(Contact.all).to eq [first_contact, second_contact]
-        expect(Contact.by_email(:desc)).to eq [second_contact, first_contact]
+        expect(Contact.sort_by_email(:asc)).to eq [first_contact, second_contact]
+        expect(Contact.sort_by_email(:desc)).to eq [second_contact, first_contact]
       end
     end
 
-    describe '.by_group' do
+    describe '.sort_by_group' do
       let(:first_contact) { create(:contact, group: :family) }
       let(:second_contact) { create(:contact, group: :work) }
 
@@ -111,9 +116,10 @@ describe Contact do
       end
 
       it 'orders the contacts by first name' do
-        expect(Contact.all).to eq [first_contact, second_contact]
-        expect(Contact.by_group(:desc)).to eq [second_contact, first_contact]
+        expect(Contact.sort_by_group(:asc)).to eq [first_contact, second_contact]
+        expect(Contact.sort_by_group(:desc)).to eq [second_contact, first_contact]
       end
     end
   end
 end
+

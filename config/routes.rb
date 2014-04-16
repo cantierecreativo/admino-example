@@ -1,5 +1,8 @@
 AdminoExample::Application.routes.draw do
-  resources :contacts
+  namespace :admin do
+    resources :contacts
+  end
 
-  root to: 'contacts#index'
+  root to: redirect('/admin/contacts')
 end
+
