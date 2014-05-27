@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.1.0'
+ruby '2.1.0', engine: 'rbx', engine_version: '2.2.7'
 
 gem 'admino'
 gem 'airbrake'
@@ -27,7 +27,7 @@ gem 'simple_form_bootstrap3'
 gem 'slim-rails'
 gem 'sprockets', '~> 2.11.0'
 gem 'uglifier'
-gem 'unicorn'
+gem 'puma'
 
 group :development do
   gem 'better_errors'
