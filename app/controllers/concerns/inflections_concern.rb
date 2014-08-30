@@ -5,6 +5,8 @@ module InflectionsConcern
     helper_method :resource_class_name_inflections
   end
 
+  private
+
   def resource_class_name_inflections
     {
       singular: resource_class.model_name.human(count: 1),

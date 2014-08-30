@@ -1,6 +1,7 @@
 - query = present(@query)
+- collection = present_collection(@collection)
 
-- table = BootstrapTablePresenter.new present_collection(collection),
+- table = BootstrapTablePresenter.new collection,
                                       resource_class,
                                       query,
                                       self
@@ -13,9 +14,9 @@
     = table.to_html do |row, record|
       = render 'index_row', row: row, record: record
 
-    = paginate collection
+    = paginate @collection
 
-    p= link_to new_resource_path, class: 'btn btn-primary btn-lg btn-glyphicon' do
+    p= link_to new_resource_url, class: 'btn btn-primary btn-lg btn-glyphicon' do
       i.glyphicon.glyphicon-plus
       span= t('.actions.new', resource_class_name_inflections)
 

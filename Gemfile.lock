@@ -99,14 +99,8 @@ GEM
     foreman (0.75.0)
       dotenv (~> 0.11.1)
       thor (~> 0.19.1)
-    has_scope (0.6.0.rc)
-      actionpack (>= 3.2, < 5)
-      activesupport (>= 3.2, < 5)
     hike (1.2.3)
     i18n (0.6.11)
-    inherited_resources (1.5.0)
-      has_scope (~> 0.6.0.rc)
-      responders (~> 1.0)
     jquery-rails (3.1.1)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -276,7 +270,6 @@ DEPENDENCIES
   factory_girl_rails
   faker
   foreman
-  inherited_resources
   jquery-rails
   kaminari
   kaminari-bootstrap (~> 3.0.1)

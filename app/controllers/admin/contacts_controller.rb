@@ -1,25 +1,24 @@
 module Admin
   class ContactsController < BaseController
-   inherit_resources
-   actions :all, except: :show
+    respond_to :html
 
-   include PermittedParamsConcern
-   include InflectionsConcern
+    include InflectionsConcern
+    include RestConcern
 
     private
-
-    def collection
-      @contacts ||= query.scope(end_of_association_chain)
-    end
-
-    def query
-      @query ||= ContactsQuery.new(params)
-    end
 
     def permitted_params
       params.
         require(:contact).
         permit(:first_name, :last_name, :email, :group)
+    end
+
+    def resource_class
+      Contact
+    end
+
+    def query_class
+      ContactsQuery
     end
   end
 end
