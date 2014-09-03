@@ -11,11 +11,11 @@ class BootstrapTablePresenter < Admino::Table::Presenter
 
   class ResourceRow < Admino::Table::ResourceRow
     def edit_action_url
-      h.edit_resource_url(resource)
+      view_context.edit_resource_url(resource)
     end
 
     def destroy_action_url
-      h.resource_url(resource)
+      view_context.resource_url(resource)
     end
 
     def edit_action_html_options
