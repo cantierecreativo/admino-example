@@ -1,17 +1,11 @@
-- query = present(@query)
 - collection = present_collection(@collection)
-
-- table = BootstrapTablePresenter.new collection,
-                                      resource_class,
-                                      query,
-                                      self
 
 .page-header
   h1= t('.title', resource_class_name_inflections)
 
 .row
   .col-lg-9
-    = table.to_html do |row, record|
+    = table_for(collection, class: resource_class, presenter: BootstrapTablePresenter, query: @query) do |row, record|
       = render 'index_row', row: row, record: record
 
     = paginate @collection
@@ -24,16 +18,15 @@
     .panel.panel-default
       .panel-heading: .panel-title Search
       .panel-body
-        = query.simple_form do |form|
-          = render 'query_form', query: query, form: form
+        = simple_search_form_for(@query) do |form|
+          = render 'query_form', form: form
           = form.button :submit
 
-    - query.filter_groups.each do |filter_group|
+    - filters_for(@query) do |filter|
       .panel.panel-default
-        .panel-heading: .panel-title= filter_group.name
+        .panel-heading: .panel-title= filter.name
         .list-group
-          - filter_group.scopes.each do |scope|
-            = filter_group.scope_link scope,
-                                      class: 'list-group-item',
-                                      active_class: 'active'
+          - filter.each_scope do |scope|
+            = scope.link class: 'list-group-item',
+                         active_class: 'active'
 

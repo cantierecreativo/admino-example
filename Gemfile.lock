@@ -35,7 +35,7 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     addressable (2.3.6)
-    admino (0.0.13)
+    admino (0.0.14)
       activemodel
       activesupport
       coercible
