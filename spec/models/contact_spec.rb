@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 describe Contact do
-  it { should validate_presence_of(:first_name) }
-  it { should validate_presence_of(:last_name) }
-  it { should validate_presence_of(:email) }
+  it { is_expected.to validate_presence_of(:first_name) }
+  it { is_expected.to validate_presence_of(:last_name) }
+  it { is_expected.to validate_presence_of(:email) }
   it {
     create(:contact)
-    should validate_uniqueness_of(:email)
+    is_expected.to validate_uniqueness_of(:email)
   }
 
   describe '.matching_email' do

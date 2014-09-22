@@ -47,7 +47,7 @@ group :test do
   gem 'database_cleaner'
   gem 'launchy'
   gem 'minitest'
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', require: false
   gem 'simplecov', require: false
   gem 'tedium'
   gem 'timecop'

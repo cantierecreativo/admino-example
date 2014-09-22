@@ -6,3 +6,4 @@ class Page < SitePrism::Page
     element_exists? "##{ActionView::RecordIdentifier.dom_id(record)}"
   end
 end
+
