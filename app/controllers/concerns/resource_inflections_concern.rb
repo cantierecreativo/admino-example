@@ -1,13 +1,13 @@
-module InflectionsConcern
+module ResourceInflectionsConcern
   extend ActiveSupport::Concern
 
   included do
-    helper_method :resource_class_name_inflections
+    helper_method :inflections
   end
 
   private
 
-  def resource_class_name_inflections
+  def inflections
     {
       singular: resource_class.model_name.human(count: 1),
       plural: resource_class.model_name.human(count: 2)

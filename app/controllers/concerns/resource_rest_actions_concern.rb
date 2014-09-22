@@ -1,9 +1,12 @@
-module RestConcern
+module ResourceRestActionsConcern
   extend ActiveSupport::Concern
 
-  include UrlsConcern
+  include ResourceUrlsConcern
+  include ResourceInflectionsConcern
 
   included do
+    respond_to :html
+
     helper_method :resource_class
     helper_method :query_class
   end
@@ -45,11 +48,11 @@ module RestConcern
   private
 
   def resource_class
-    throw 'Implement me!'
+    controller_name.classify.constantize
   end
 
   def query_class
-    throw 'Implement me!'
+    "#{controller_name.classify.pluralize}Query".constantize
   end
 end
 

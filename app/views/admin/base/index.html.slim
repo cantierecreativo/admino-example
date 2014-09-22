@@ -1,7 +1,7 @@
 - collection = present_collection(@collection)
 
 .page-header
-  h1= t('.title', resource_class_name_inflections)
+  h1= t('.title', inflections)
 
 .row
   .col-lg-9
@@ -12,7 +12,7 @@
 
     p= link_to new_resource_url, class: 'btn btn-primary btn-lg btn-glyphicon' do
       i.glyphicon.glyphicon-plus
-      span= t('.actions.new', resource_class_name_inflections)
+      span= t('.actions.new', inflections)
 
   .col-lg-3
     .panel.panel-default

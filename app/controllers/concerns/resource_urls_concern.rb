@@ -1,4 +1,4 @@
-module UrlsConcern
+module ResourceUrlsConcern
   extend ActiveSupport::Concern
 
   included do

@@ -1,5 +1,5 @@
 .page-header
-  h1= t('.title', resource_class_name_inflections)
+  h1= t('.title', inflections)
 
 = simple_form_for @resource, url: collection_url do |form|
   = render 'form', form: form
