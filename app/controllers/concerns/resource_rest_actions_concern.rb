@@ -13,7 +13,7 @@ module ResourceRestActionsConcern
 
   def index
     @query = query_class.new(params)
-    @collection = @query.scope
+    @collection = @query.scope(starting_scope)
     respond_with @collection
   end
 
@@ -45,7 +45,7 @@ module ResourceRestActionsConcern
     respond_with @resource, location: collection_url
   end
 
-  private
+  protected
 
   def resource_class
     controller_name.classify.constantize
@@ -53,6 +53,9 @@ module ResourceRestActionsConcern
 
   def query_class
     "#{controller_name.classify.pluralize}Query".constantize
+  end
+  
+  def starting_scope
   end
 end
 
