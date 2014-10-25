@@ -5,7 +5,6 @@ module ResourceUrlsConcern
     helper_method :edit_resource_url,
       :resource_url,
       :new_resource_url,
-      :new_resource_url,
       :collection_url
   end
 
